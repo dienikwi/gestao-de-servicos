@@ -8,12 +8,13 @@ function FormArea() {
 
     const [servico, setServico] = useState({ nomeCliente: '', dataInicio: '', dataTermino: '', descricaoServico: '', valorServico: '', valorPago: '', dataPagamento: '' });
     const [servicos, setServicos] = useState([]);
+    const [atualizar, setAtualizar] = useState();
 
     useEffect(() => {
         axios.get("http://localhost:8080/api/servico/").then(result => {
             setServicos(result.data);
-        })
-    }, []);
+        });
+    }, [atualizar]);
 
     function handleChange(event) {
         setServico({ ...servico, [event.target.name]: event.target.value });
@@ -21,9 +22,9 @@ function FormArea() {
 
     function handleSubmit(event) {
         event.preventDefault();
-        axios.post("http://localhost:8080/api/servico/", servico).then((result => {
-            console.log(result);
-        }));
+        axios.post("http://localhost:8080/api/servico/", servico).then((result) => {
+            setAtualizar(result);
+        });
     }
 
     return (
