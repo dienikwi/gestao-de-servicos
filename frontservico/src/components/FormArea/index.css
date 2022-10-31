@@ -1,0 +1,59 @@
+.container {
+    width: 80%;
+    margin: 2% auto auto auto;
+    padding: 1%;
+    box-shadow: 0px 0px 5px #CCC;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.container h1 {
+    font-size: 26px;
+    margin-bottom: 2%;
+    margin-left: auto;
+    margin-right: auto;
+    color: teal;
+}
+
+.campos {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-bottom: 2%;
+}
+
+.campos label {
+    margin-bottom: 1%;
+    font-size: 18px;
+}
+
+.campos input {
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px #CCC;
+}
+
+.campos input:focus-visible {
+    outline: 1px solid teal;
+}
+
+.bt {
+    background-color: teal;
+    color: #eee;
+    cursor: pointer;
+    transition: all ease 0.5s;
+}
+
+.bt:hover {
+    opacity: 0.8;
+}
+
+@media (max-width: 760px) {
+    .campos {
+        width: 100%;
+        padding: 2%;
+    }
+}
