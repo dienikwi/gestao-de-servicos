@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import './index.css';
+import cadastro from "../images/cadastro.png";
 
 
 function FormArea() {
 
-    const [servico, setServico] = useState({ nomeCliente: '', dataInicio: '', dataTermino: '', descricaoServico: '', valorServico:'', valorPago: '', dataPagamento: '' });
+    const [servico, setServico] = useState({ nomeCliente: '', dataInicio: '', dataTermino: '', descricaoServico: '', valorServico: '', valorPago: '', dataPagamento: '' });
     const [servicos, setServicos] = useState([]);
+
+    useEffect(() => {
+        axios.get("http://localhost:8080/api/servico/").then(result => {
+            setServicos(result.data);
+        })
+    }, []);
 
     function handleChange(event) {
         setServico({ ...servico, [event.target.name]: event.target.value });
@@ -20,42 +27,78 @@ function FormArea() {
     }
 
     return (
-        <div className="container">
-            <h1>Cadastro de Serviços</h1>
-            <form onSubmit={handleSubmit}>
-                <div className="campos">
-                    <label>Nome do cliente: </label>
-                    <input onChange={handleChange} value={servico.nomeCliente} name="nomeCliente" type="text" placeholder="Digite seu nome..." ></input>
+        <>
+            <div className="container">
+                <div className="dividir">
+                    <figure>
+                        <img src={cadastro} alt="Ilustração" />
+                    </figure>
+                    <div>
+                        <h1>Cadastro de Serviços</h1>
+                        <form onSubmit={handleSubmit}>
+                            <div className="todos-campos">
+                                <div className="campos nome">
+                                    <label>Nome do cliente: </label>
+                                    <input onChange={handleChange} value={servico.nomeCliente} name="nomeCliente" type="text" placeholder="Digite seu nome..." ></input>
+                                </div>
+                                <div className="campos">
+                                    <label>Data de início: </label>
+                                    <input onChange={handleChange} value={servico.dataInicio} name="dataInicio" type="date"></input>
+                                </div>
+                                <div className="campos">
+                                    <label>Data de termino: </label>
+                                    <input onChange={handleChange} value={servico.dataTermino} name="dataTermino" type="date"></input>
+                                </div>
+                                <div className="campos">
+                                    <label>Descrição do serviço: </label>
+                                    <input onChange={handleChange} value={servico.descricaoServico} name="descricaoServico" type="text" placeholder="O que você está oferencendo..."></input>
+                                </div>
+                                <div className="campos">
+                                    <label>Valor do serviço: </label>
+                                    <input onChange={handleChange} value={servico.valorServico} name="valorServico" type="number" placeholder="Valor do seu serviço..."></input>
+                                </div>
+                                <div className="campos">
+                                    <label>Valor pago: </label>
+                                    <input onChange={handleChange} value={servico.valorPago} name="valorPago" type="number" placeholder="O que você está oferencendo..."></input>
+                                </div>
+                                <div className="campos">
+                                    <label>Data de pagamento: </label>
+                                    <input onChange={handleChange} value={servico.dataPagamento} name="dataPagamento" type="date"></input>
+                                </div>
+                            </div>
+                            <div className="campos bt">
+                                <input type="submit" value="Cadastrar"></input>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <div className="campos">
-                    <label>Data de início: </label>
-                    <input onChange={handleChange} value={servico.dataInicio} name="dataInicio" type="date"></input>
-                </div>
-                <div className="campos">
-                    <label>Data de termino: </label>
-                    <input onChange={handleChange} value={servico.dataTermino} name="dataTermino" type="date"></input>
-                </div>
-                <div className="campos">
-                    <label>Descrição do serviço: </label>
-                    <input onChange={handleChange} value={servico.descricaoServico} name="descricaoServico" type="text" placeholder="O que você está oferencendo..."></input>
-                </div>
-                <div className="campos">
-                    <label>Valor do serviço: </label>
-                    <input onChange={handleChange} value={servico.valorServico} name="valorServico" type="number" placeholder="Valor do seu serviço..."></input>
-                </div>
-                <div className="campos">
-                    <label>Valor pago: </label>
-                    <input onChange={handleChange} value={servico.valorPago} name="valorPago" type="number" placeholder="O que você está oferencendo..."></input>
-                </div>
-                <div className="campos">
-                    <label>Data de pagamento: </label>
-                    <input onChange={handleChange} value={servico.dataPagamento} name="dataPagamento" type="date"></input>
-                </div>
-                <div className="campos">
-                    <input className="bt" type="submit" value="Cadastrar"></input>
-                </div>
-            </form>
-        </div>
+            </div>
+            <hr />
+            <h1>Serviços cadastrados</h1>
+            <div className="container">
+                <table className="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Descrição</th>
+                            <th scope="col">Valor</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Opções</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {servicos.map(serv =>
+                            <tr>
+                                <td>{serv.nomeCliente}</td>
+                                <td>{serv.descricaoServico}</td>
+                                <td>{serv.valorServico}</td>
+                                <td>{serv.status}</td>
+                            </tr>
+                        )}
+                    </tbody>
+                </table>
+            </div>
+        </>
     );
 }
 
