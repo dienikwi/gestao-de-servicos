@@ -90,10 +90,15 @@ function FormArea() {
                     <tbody>
                         {servicos.map(serv =>
                             <tr>
-                                <td>{serv.nomeCliente}</td>
+                                <td><span>{serv.nomeCliente}</span></td>
                                 <td>{serv.descricaoServico}</td>
                                 <td>{serv.valorServico}</td>
                                 <td>{serv.status}</td>
+                                <td className="botoes">
+                                    <button className="btn btn-primary">Alterar</button>
+                                    <button className="btn btn-danger">Excluir</button>
+                                    <button className="btn btn-warning">Cancelar</button>
+                                </td>
                             </tr>
                         )}
                     </tbody>

@@ -74,9 +74,18 @@ tr:hover {
     background-color: #F7F7F7 !important;
 }
 
+.botoes {
+    display: flex;
+    flex-direction: row;
+}
+
+.btn {
+    margin-right: 2%;
+}
+
 @media (max-width: 760px) {
     .dividir {
-        display:block;
+        display: block;
     }
 
     figure {
@@ -98,4 +107,15 @@ tr:hover {
         font-size: 13px !important;
     }
 
+    .botoes {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .btn {
+        font-size: 10px;
+        text-align: left !important;
+        padding-left: 2px;
+        margin-top: 10%;
+    }
 }
